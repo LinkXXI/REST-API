@@ -1,5 +1,9 @@
 package org.rogue.controllers;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.rogue.controllers.Exceptions.BadRequestException;
 import org.rogue.controllers.Exceptions.NotAllowedException;
 import org.rogue.controllers.Exceptions.NotFoundException;
@@ -9,9 +13,6 @@ import org.rogue.models.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * Created by Kevin on 2015-04-07.
