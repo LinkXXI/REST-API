@@ -16,7 +16,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue
-    int id;
+    private int id;
     @Column(unique = true)
     private String email;
     private String password;
@@ -29,6 +29,13 @@ public class User implements Serializable {
     private AccountType accountType;
 
     public User() {
+    }
+
+    public User(String email, String firstName, String password, String lastName) {
+        this.email = email;
+        this.firstName = firstName;
+        this.password = password;
+        this.lastName = lastName;
     }
 
     public User(String email, String password, String firstName, String lastName, Address address, String status, AccountType accountType) {

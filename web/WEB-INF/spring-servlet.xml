@@ -17,4 +17,8 @@
         <property name="prefix" value="/WEB-INF/jsps/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <bean id="dispatcherServlet" class="org.springframework.web.servlet.DispatcherServlet">
+        <property name="dispatchOptionsRequest" value="true"/>
+    </bean>
 </beans>

@@ -20,8 +20,15 @@
         <property name="hbm2ddl.auto">update</property>
 
         <!-- Name the annotated Entity classes -->
-        <mapping class="org.rogue.models.User"/>
         <mapping class="org.rogue.models.Address"/>
+        <mapping class="org.rogue.models.Contact"/>
+        <mapping class="org.rogue.models.DocumentWorkspace"/>
+        <mapping class="org.rogue.models.Event"/>
+        <mapping class="org.rogue.models.Report"/>
+        <mapping class="org.rogue.models.Task"/>
+        <mapping class="org.rogue.models.User"/>
+        <mapping class="org.rogue.models.Vendor"/>
+        <mapping class="org.rogue.models.Venue"/>
 
     </session-factory>
 </hibernate-configuration>

@@ -5,7 +5,7 @@ import org.rogue.controllers.Exceptions.NotFoundException;
 import org.rogue.controllers.Exceptions.NotImplementedException;
 import org.rogue.controllers.responses.Result;
 import org.rogue.dao.GenericDAO;
-import org.rogue.models.User;
+import org.rogue.models.Address;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -19,11 +19,11 @@ import java.util.*;
  * Created by Kevin on 2015-04-10.
  */
 @Controller
-@RequestMapping("/users/")
-public class UserController extends AbstractBaseController<User> {
+@RequestMapping("/addresses")
+public class AddressController extends AbstractBaseController<Address> {
 
-    public UserController() {
-        this.dao = new GenericDAO<>(User.class);
+    public AddressController() {
+        this.dao = new GenericDAO<>(Address.class);
     }
 
     @Override
@@ -38,14 +38,14 @@ public class UserController extends AbstractBaseController<User> {
     @Override
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
-    Map<String, Object> post(@RequestBody User user) {
-        if (dao.create(user)) {
+    Map<String, Object> post(@RequestBody Address address) {
+        if (dao.create(address)) {
             return new HashMap<String, Object>() {{
-                put("result", new Result("create", new Date(), "success", user.getId()));
+                put("result", new Result("create", new Date(), "success", address.getId()));
             }};
         } else {
             return new HashMap<String, Object>() {{
-                put("error", new org.rogue.controllers.responses.Error("Unable to create user", "unable to create user", new Date()));
+                put("error", new org.rogue.controllers.responses.Error("Unable to create address", "unable to create address", new Date()));
             }};
         }
     }
@@ -85,10 +85,10 @@ public class UserController extends AbstractBaseController<User> {
     @RequestMapping("/{id}")
     @ResponseBody
     Map<String, Object> get(@PathVariable int id) throws NotFoundException {
-        Optional<User> userOptional = dao.getById(id);
+        Optional<Address> userOptional = dao.getById(id);
         if (userOptional.isPresent()) {
             return new HashMap<String, Object>() {{
-                put("User", userOptional.get());
+                put("Address", userOptional.get());
             }};
         } else {
             throw new NotFoundException();
@@ -105,14 +105,14 @@ public class UserController extends AbstractBaseController<User> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
     @ResponseBody
-    Map<String, Object> patch(@PathVariable int id, @RequestBody User user) {
+    Map<String, Object> patch(@PathVariable int id, @RequestBody Address user) {
         if (dao.update(user)) {
             return new HashMap<String, Object>() {{
-                put("success", new Result("update user", new Date(), "success", user));
+                put("success", new Result("update address", new Date(), "success", user));
             }};
         } else {
             return new HashMap<String, Object>() {{
-                put("failure", new Result("update user", new Date(), "fail", user));
+                put("failure", new Result("update address", new Date(), "fail", user));
             }};
         }
     }
@@ -120,14 +120,14 @@ public class UserController extends AbstractBaseController<User> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    Map<String, Object> put(@PathVariable int id, User user) {
+    Map<String, Object> put(@PathVariable int id, Address user) {
         if (dao.update(user)) {
             return new HashMap<String, Object>() {{
-                put("success", new Result("update user", new Date(), "success", user));
+                put("success", new Result("update address", new Date(), "success", user));
             }};
         } else {
             return new HashMap<String, Object>() {{
-                put("failure", new Result("update user", new Date(), "fail", user));
+                put("failure", new Result("update address", new Date(), "fail", user));
             }};
         }
     }
@@ -138,11 +138,11 @@ public class UserController extends AbstractBaseController<User> {
     Map<String, Object> delete(@PathVariable int id) {
         if (dao.deleteById(id)) {
             return new HashMap<String, Object>() {{
-                put("success", new Result("delete user", new Date(), "success", id));
+                put("success", new Result("delete address", new Date(), "success", id));
             }};
         } else {
             return new HashMap<String, Object>() {{
-                put("failure", new Result("update user", new Date(), "fail", id));
+                put("failure", new Result("update address", new Date(), "fail", id));
             }};
         }
     }
