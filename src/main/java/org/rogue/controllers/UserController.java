@@ -1,10 +1,5 @@
 package org.rogue.controllers;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.rogue.controllers.Exceptions.BadRequestException;
 import org.rogue.controllers.Exceptions.NotAllowedException;
 import org.rogue.controllers.Exceptions.NotFoundException;
 import org.rogue.controllers.Exceptions.NotImplementedException;
@@ -34,7 +29,7 @@ public class UserController extends AbstractBaseController<User> {
     @Override
     @RequestMapping("/")
     @ResponseBody
-    Map<String, Object> get() {
+    public Map<String, Object> get() {
         return new HashMap<String, Object>() {{
             put("Users", dao.getAll().get());
         }};
@@ -43,7 +38,7 @@ public class UserController extends AbstractBaseController<User> {
     @Override
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
-    Map<String, Object> post(@RequestBody User user) {
+    public Map<String, Object> post(@RequestBody User user) {
         if (dao.create(user)) {
             return new HashMap<String, Object>() {{
                 put("result", new Result("create", new Date(), "success", user.getId()));
@@ -58,28 +53,28 @@ public class UserController extends AbstractBaseController<User> {
     @Override
     @RequestMapping(value = "/", method = RequestMethod.PATCH)
     @ResponseBody
-    Map<String, Object> patch() throws NotImplementedException {
+    public Map<String, Object> patch() throws NotImplementedException {
         throw new NotImplementedException();
     }
 
     @Override
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     @ResponseBody
-    Map<String, Object> put() throws NotAllowedException {
+    public Map<String, Object> put() throws NotAllowedException {
         throw new NotAllowedException();
     }
 
     @Override
     @RequestMapping(value = "/", method = RequestMethod.DELETE)
     @ResponseBody
-    Map<String, Object> delete() throws NotAllowedException {
+    public Map<String, Object> delete() throws NotAllowedException {
         throw new NotAllowedException();
     }
 
     @Override
     @RequestMapping(value = "/", method = RequestMethod.OPTIONS)
     @ResponseBody
-    ResponseEntity<Void> options() throws NotAllowedException {
+    public ResponseEntity<Void> options() throws NotAllowedException {
         HttpHeaders responseHeaders = new HttpHeaders();
 
         responseHeaders.setAllow(new HashSet<>(Arrays.asList(new HttpMethod[]{HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS})));
@@ -89,7 +84,7 @@ public class UserController extends AbstractBaseController<User> {
     @Override
     @RequestMapping("/{id}")
     @ResponseBody
-    Map<String, Object> get(@PathVariable int id) throws NotFoundException {
+    public Map<String, Object> get(@PathVariable int id) throws NotFoundException {
         Optional<User> userOptional = dao.getById(id);
         if (userOptional.isPresent()) {
             return new HashMap<String, Object>() {{
@@ -103,14 +98,14 @@ public class UserController extends AbstractBaseController<User> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     @ResponseBody
-    Map<String, Object> post(@PathVariable int id) throws NotImplementedException {
+    public Map<String, Object> post(@PathVariable int id) throws NotImplementedException {
         throw new NotImplementedException();
     }
 
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
     @ResponseBody
-    Map<String, Object> patch(@PathVariable int id, @RequestBody User user) {
+    public Map<String, Object> patch(@PathVariable int id, @RequestBody User user) {
         if (dao.update(user)) {
             return new HashMap<String, Object>() {{
                 put("success", new Result("update user", new Date(), "success", user));
@@ -125,7 +120,7 @@ public class UserController extends AbstractBaseController<User> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    Map<String, Object> put(@PathVariable int id, User user) {
+    public Map<String, Object> put(@PathVariable int id, User user) {
         if (dao.update(user)) {
             return new HashMap<String, Object>() {{
                 put("success", new Result("update user", new Date(), "success", user));
@@ -140,7 +135,7 @@ public class UserController extends AbstractBaseController<User> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    Map<String, Object> delete(@PathVariable int id) {
+    public Map<String, Object> delete(@PathVariable int id) {
         if (dao.deleteById(id)) {
             return new HashMap<String, Object>() {{
                 put("success", new Result("delete user", new Date(), "success", id));
@@ -155,7 +150,7 @@ public class UserController extends AbstractBaseController<User> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.OPTIONS)
     @ResponseBody
-    ResponseEntity<Void> options(@PathVariable int id) {
+    public ResponseEntity<Void> options(@PathVariable int id) {
         HttpHeaders responseHeaders = new HttpHeaders();
 
         responseHeaders.setAllow(new HashSet<>(Arrays.asList(new HttpMethod[]{HttpMethod.GET, HttpMethod.PUT, HttpMethod.PATCH, HttpMethod.DELETE, HttpMethod.OPTIONS})));

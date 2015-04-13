@@ -22,29 +22,29 @@ import java.util.Map;
 public abstract class AbstractBaseController<T extends Serializable> {
     protected GenericDAO<T> dao;
 
-    abstract Map<String, Object> get() throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
+    public abstract Map<String, Object> get() throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
 
-    abstract Map<String, Object> post(@RequestBody T t) throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
+    public abstract Map<String, Object> post(@RequestBody T t) throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
 
-    abstract Map<String, Object> patch() throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
+    public abstract Map<String, Object> patch() throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
 
-    abstract Map<String, Object> put() throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
+    public abstract Map<String, Object> put() throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
 
-    abstract Map<String, Object> delete() throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
+    public abstract Map<String, Object> delete() throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
 
-    abstract ResponseEntity<Void> options() throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
+    public abstract ResponseEntity<Void> options() throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
 
-    abstract Map<String, Object> get(@PathVariable int id) throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
+    public abstract Map<String, Object> get(@PathVariable int id) throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
 
-    abstract Map<String, Object> post(@PathVariable int id) throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
+    public abstract Map<String, Object> post(@PathVariable int id) throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
 
-    abstract Map<String, Object> patch(@PathVariable int id, @RequestBody T t) throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
+    public abstract Map<String, Object> patch(@PathVariable int id, @RequestBody T t) throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
 
-    abstract Map<String, Object> put(@PathVariable int id, T t) throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
+    public abstract Map<String, Object> put(@PathVariable int id, T t) throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
 
-    abstract Map<String, Object> delete(@PathVariable int id) throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
+    public abstract Map<String, Object> delete(@PathVariable int id) throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
 
-    abstract ResponseEntity<Void> options(@PathVariable int id) throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
+    public abstract ResponseEntity<Void> options(@PathVariable int id) throws BadRequestException, NotAllowedException, NotFoundException, NotImplementedException;
 
     /**
      * Exception Handlers

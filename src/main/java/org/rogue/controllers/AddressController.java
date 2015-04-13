@@ -29,7 +29,7 @@ public class AddressController extends AbstractBaseController<Address> {
     @Override
     @RequestMapping("/")
     @ResponseBody
-    Map<String, Object> get() {
+    public Map<String, Object> get() {
         return new HashMap<String, Object>() {{
             put("Users", dao.getAll().get());
         }};
@@ -38,7 +38,7 @@ public class AddressController extends AbstractBaseController<Address> {
     @Override
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
-    Map<String, Object> post(@RequestBody Address address) {
+    public Map<String, Object> post(@RequestBody Address address) {
         if (dao.create(address)) {
             return new HashMap<String, Object>() {{
                 put("result", new Result("create", new Date(), "success", address.getId()));
@@ -53,28 +53,28 @@ public class AddressController extends AbstractBaseController<Address> {
     @Override
     @RequestMapping(value = "/", method = RequestMethod.PATCH)
     @ResponseBody
-    Map<String, Object> patch() throws NotImplementedException {
+    public Map<String, Object> patch() throws NotImplementedException {
         throw new NotImplementedException();
     }
 
     @Override
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     @ResponseBody
-    Map<String, Object> put() throws NotAllowedException {
+    public Map<String, Object> put() throws NotAllowedException {
         throw new NotAllowedException();
     }
 
     @Override
     @RequestMapping(value = "/", method = RequestMethod.DELETE)
     @ResponseBody
-    Map<String, Object> delete() throws NotAllowedException {
+    public Map<String, Object> delete() throws NotAllowedException {
         throw new NotAllowedException();
     }
 
     @Override
     @RequestMapping(value = "/", method = RequestMethod.OPTIONS)
     @ResponseBody
-    ResponseEntity<Void> options() throws NotAllowedException {
+    public ResponseEntity<Void> options() throws NotAllowedException {
         HttpHeaders responseHeaders = new HttpHeaders();
 
         responseHeaders.setAllow(new HashSet<>(Arrays.asList(new HttpMethod[]{HttpMethod.GET, HttpMethod.POST, HttpMethod.OPTIONS})));
@@ -84,7 +84,7 @@ public class AddressController extends AbstractBaseController<Address> {
     @Override
     @RequestMapping("/{id}")
     @ResponseBody
-    Map<String, Object> get(@PathVariable int id) throws NotFoundException {
+    public Map<String, Object> get(@PathVariable int id) throws NotFoundException {
         Optional<Address> userOptional = dao.getById(id);
         if (userOptional.isPresent()) {
             return new HashMap<String, Object>() {{
@@ -98,14 +98,14 @@ public class AddressController extends AbstractBaseController<Address> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     @ResponseBody
-    Map<String, Object> post(@PathVariable int id) throws NotImplementedException {
+    public Map<String, Object> post(@PathVariable int id) throws NotImplementedException {
         throw new NotImplementedException();
     }
 
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
     @ResponseBody
-    Map<String, Object> patch(@PathVariable int id, @RequestBody Address user) {
+    public Map<String, Object> patch(@PathVariable int id, @RequestBody Address user) {
         if (dao.update(user)) {
             return new HashMap<String, Object>() {{
                 put("success", new Result("update address", new Date(), "success", user));
@@ -120,7 +120,7 @@ public class AddressController extends AbstractBaseController<Address> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    Map<String, Object> put(@PathVariable int id, Address user) {
+    public Map<String, Object> put(@PathVariable int id, Address user) {
         if (dao.update(user)) {
             return new HashMap<String, Object>() {{
                 put("success", new Result("update address", new Date(), "success", user));
@@ -135,7 +135,7 @@ public class AddressController extends AbstractBaseController<Address> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    Map<String, Object> delete(@PathVariable int id) {
+    public Map<String, Object> delete(@PathVariable int id) {
         if (dao.deleteById(id)) {
             return new HashMap<String, Object>() {{
                 put("success", new Result("delete address", new Date(), "success", id));
@@ -150,7 +150,7 @@ public class AddressController extends AbstractBaseController<Address> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.OPTIONS)
     @ResponseBody
-    ResponseEntity<Void> options(@PathVariable int id) {
+    public ResponseEntity<Void> options(@PathVariable int id) {
         HttpHeaders responseHeaders = new HttpHeaders();
 
         responseHeaders.setAllow(new HashSet<>(Arrays.asList(new HttpMethod[]{HttpMethod.GET, HttpMethod.PUT, HttpMethod.PATCH, HttpMethod.DELETE, HttpMethod.OPTIONS})));
