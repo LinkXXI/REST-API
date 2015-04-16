@@ -12,10 +12,41 @@
 </head>
 <body>
 <h1>Available paths</h1>
-<table>
-    <tr>
-        <td>user</td>
-    </tr>
-</table>
+
+<p>/addresses/</p>
+
+<p>/addresses/{id}</p>
+
+<p>/contacts/</p>
+
+<p>/contacts/{id}</p>
+
+<p>/documents/</p>
+
+<p>/documents/{id}</p>
+
+<p>/events/</p>
+
+<p>/events/{id}</p>
+
+<p>/reports/</p>
+
+<p>/reports/{id}</p>
+
+<p>/tasks/</p>
+
+<p>/tasks/{id}</p>
+
+<p>/users/</p>
+
+<p>/users/{id}</p>
+
+<p>/vendors/</p>
+
+<p>/vendors/{id}</p>
+
+<p>/venues/</p>
+
+<p>/venues/{id}</p>
 </body>
 </html>

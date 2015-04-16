@@ -5,7 +5,7 @@ import org.rogue.controllers.Exceptions.NotFoundException;
 import org.rogue.controllers.Exceptions.NotImplementedException;
 import org.rogue.controllers.responses.Result;
 import org.rogue.dao.GenericDAO;
-import org.rogue.models.Contact;
+import org.rogue.models.Event;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 /**
- * Created by Kevin on 2015-04-10.
+ * Created by Kevin on 2015-04-13.
  */
 @Controller
-@RequestMapping("/contacts/")
-public class ContactController extends AbstractBaseController<Contact> {
+@RequestMapping("/events/")
+public class EventController extends AbstractBaseController<Event> {
 
-    public ContactController() {
-        this.dao = new GenericDAO<>(Contact.class);
+    public EventController() {
+        this.dao = new GenericDAO<>(Event.class);
     }
 
     @Override
@@ -38,14 +38,14 @@ public class ContactController extends AbstractBaseController<Contact> {
     @Override
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> post(@RequestBody Contact contact) {
-        if (dao.create(contact)) {
+    public Map<String, Object> post(@RequestBody Event event) {
+        if (dao.create(event)) {
             return new HashMap<String, Object>() {{
-                put("result", new Result("create", new Date(), "success", contact.getId()));
+                put("result", new Result("create", new Date(), "success", event.getId()));
             }};
         } else {
             return new HashMap<String, Object>() {{
-                put("error", new org.rogue.controllers.responses.Error("Unable to create contact", "unable to create contact", new Date()));
+                put("error", new org.rogue.controllers.responses.Error("Unable to create event", "unable to create event", new Date()));
             }};
         }
     }
@@ -85,10 +85,10 @@ public class ContactController extends AbstractBaseController<Contact> {
     @RequestMapping("/{id}")
     @ResponseBody
     public Map<String, Object> get(@PathVariable int id) throws NotFoundException {
-        Optional<Contact> userOptional = dao.getById(id);
+        Optional<Event> userOptional = dao.getById(id);
         if (userOptional.isPresent()) {
             return new HashMap<String, Object>() {{
-                put("Contact", userOptional.get());
+                put("Event", userOptional.get());
             }};
         } else {
             throw new NotFoundException();
@@ -105,14 +105,14 @@ public class ContactController extends AbstractBaseController<Contact> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
     @ResponseBody
-    public Map<String, Object> patch(@PathVariable int id, @RequestBody Contact contact) {
-        if (dao.update(contact)) {
+    public Map<String, Object> patch(@PathVariable int id, @RequestBody Event event) {
+        if (dao.update(event)) {
             return new HashMap<String, Object>() {{
-                put("success", new Result("update contact", new Date(), "success", contact));
+                put("success", new Result("update event", new Date(), "success", event));
             }};
         } else {
             return new HashMap<String, Object>() {{
-                put("failure", new Result("update contact", new Date(), "fail", contact));
+                put("failure", new Result("update event", new Date(), "fail", event));
             }};
         }
     }
@@ -120,14 +120,14 @@ public class ContactController extends AbstractBaseController<Contact> {
     @Override
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public Map<String, Object> put(@PathVariable int id, Contact contact) {
-        if (dao.update(contact)) {
+    public Map<String, Object> put(@PathVariable int id, Event event) {
+        if (dao.update(event)) {
             return new HashMap<String, Object>() {{
-                put("success", new Result("update contact", new Date(), "success", contact));
+                put("success", new Result("update event", new Date(), "success", event));
             }};
         } else {
             return new HashMap<String, Object>() {{
-                put("failure", new Result("update contact", new Date(), "fail", contact));
+                put("failure", new Result("update event", new Date(), "fail", event));
             }};
         }
     }
@@ -138,11 +138,11 @@ public class ContactController extends AbstractBaseController<Contact> {
     public Map<String, Object> delete(@PathVariable int id) {
         if (dao.deleteById(id)) {
             return new HashMap<String, Object>() {{
-                put("success", new Result("delete contact", new Date(), "success", id));
+                put("success", new Result("delete event", new Date(), "success", id));
             }};
         } else {
             return new HashMap<String, Object>() {{
-                put("failure", new Result("update contact", new Date(), "fail", id));
+                put("failure", new Result("update event", new Date(), "fail", id));
             }};
         }
     }
@@ -156,5 +156,4 @@ public class ContactController extends AbstractBaseController<Contact> {
         responseHeaders.setAllow(new HashSet<>(Arrays.asList(new HttpMethod[]{HttpMethod.GET, HttpMethod.PUT, HttpMethod.PATCH, HttpMethod.DELETE, HttpMethod.OPTIONS})));
         return new ResponseEntity<>(responseHeaders, HttpStatus.NO_CONTENT);
     }
-
 }
