@@ -22,6 +22,9 @@ import java.util.*;
 @RequestMapping("/addresses")
 public class AddressController extends AbstractBaseController<Address> {
 
+    /**
+     * Constructor
+     */
     public AddressController() {
         this.dao = new GenericDAO<>(Address.class);
     }
